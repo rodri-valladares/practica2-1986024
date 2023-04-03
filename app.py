@@ -1,11 +1,14 @@
-from suma import sumar
+from flask import Flask, render_template
 
-print("Hola este es un código escrito en mi editor de texto")
+app = Flask(__name__)
 
-nombre = input("Ingrese su nombre")
+@app.route('/')
+def home():
+    
+    return render_template('index.html', saludo = persona1.saludo() )
 
-print(f'El nombre ingresado es {nombre}')
-
-total = sumar(5,5)
-
-print(f'El resultado de la suma es {total}')
+if __name__ == '__main__':
+    from persona import Persona
+    persona1 = Persona(36666777, 'Rodrigo')
+    
+    app.run(debug=True)
