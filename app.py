@@ -5,10 +5,20 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     
-    return render_template('home-banking.html', saludo = persona1.nombre )
+    persona_titular = lista_de_datos['dni']
+    
+    return render_template('home-banking.html',
+                           saludo=persona_titular.saludo(),
+                           movements=persona_titular.obtener_todos_los_movimientos())
+
+@app.route('/proceso')
+def procesar():
+    return render_template('proceso.html')
 
 if __name__ == '__main__':
-    from persona import Persona
-    persona1 = Persona(36666777, 'Rodrigo')
     
+    import proceso_cuentas
+
+    lista_de_datos = proceso_cuentas.crear_cuentas()
+
     app.run(debug=True)
